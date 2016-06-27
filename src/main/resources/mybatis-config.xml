@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <!--mybatis全局属性-->
+    <settings>
+        <!--使用jdbc useGeneratedKeys自增主键-->
+        <setting name="useGeneratedKeys" value="true"/>
+        <!--驼峰命名映射-->
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+
+        <setting name= "cacheEnabled" value ="false" />
+    </settings>
+
+    <plugins >
+        <plugin interceptor="interceptor.PagePlugin">
+            <!--数据库方言-->
+            <property name= "dialect" value ="mysql" />
+            <!--mybatis的select标签的id包含"ByPage"才会被拦截-->
+            <property name= "pageSqlId" value =".*ByPage.*" />
+            <property name= "groupSqld" value =".*ByGroupPage.*" />
+        </plugin>
+    </plugins >
+
+
+</configuration>
