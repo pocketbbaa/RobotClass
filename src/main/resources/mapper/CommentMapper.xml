@@ -14,5 +14,20 @@
         course_id = #{courseId}
     </select>
 
+    <insert id="addComment">
+        INSERT INTO comment
+        (text,create_time,user_id,course_id)
+        VALUES
+        (#{text},#{createTime},#{userId},#{courseId})
+    </insert>
+
+    <delete id="delComment" parameterType="Long">
+        DELETE FROM comment
+        WHERE
+        id = #{id}
+    </delete>
+
+
+
 
 </mapper>

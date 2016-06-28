@@ -61,5 +61,15 @@ public class RegexUtil {
         return check(username,regex);
     }
 
+    /**
+     * 校验密码(字符+数字 8到20位)
+     * @param password
+     * @return
+     */
+    public static boolean checkPassword(String password){
+        String regex ="[A-Za-z0-9]{8,20}";
+        return check(password,regex);
+    }
+
 
 }

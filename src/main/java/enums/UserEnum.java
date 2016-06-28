@@ -6,10 +6,12 @@ package enums;
  */
 public enum UserEnum {
 
-    USER_NOEXIST(1,"用户名不存在"),
-    USER_FORMATERROR(2,"用户名格式错误"),
-    USER_NAMENULL(3,"参数错误");
-
+    USER_NOEXIST(1, "用户名不存在"),
+    USER_FORMATERROR(2, "参数格式错误"),
+    USER_PARAMEERROR(3, "参数错误"),
+    USER_NOJD(4,"没有权限"),
+    USER_ADDERROR(5,"添加用户失败"),
+    USER_ADDSUCCESS(6,"添加用户成功");
 
 
     private int state;

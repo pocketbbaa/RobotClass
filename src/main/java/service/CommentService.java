@@ -16,6 +16,20 @@ public interface CommentService {
      */
     List<Comment> getCommentListByPage(Long courseId);
 
+    /**
+     * 添加评论
+     * @param comment
+     * @return
+     */
+    boolean addComment(Long userId,Long courseId,Comment comment);
+
+    /**
+     * 根据ID删除评论
+     * @param id
+     * @return
+     */
+    boolean delComment(Long id);
+
 
 
 }

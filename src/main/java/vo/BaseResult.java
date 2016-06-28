@@ -19,6 +19,10 @@ public class BaseResult implements Serializable{
         this.message = message;
     }
 
+    public BaseResult(int status) {
+        this.status = status;
+    }
+
     public BaseResult(int status, String message, Object date) {
         this.status = status;
         this.message = message;
