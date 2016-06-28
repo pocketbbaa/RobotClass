@@ -1,9 +1,12 @@
 package service.impl;
 
+import dao.CommentDao;
 import model.Comment;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import service.CommentService;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -12,6 +15,9 @@ import java.util.List;
 @Service
 public class CommentServiceImpl implements CommentService {
 
+
+    @Autowired
+    private CommentDao dao;
 
     @Override
     public List<Comment> getCommentListByPage(Long courseId) {
@@ -22,15 +28,13 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     public boolean addComment(Long userId, Long courseId, Comment comment) {
-
-
-        return false;
+        int i = dao.addComment(userId, courseId, comment.getText(), comment.getCreateTime());
+        return i == 1;
     }
 
     @Override
     public boolean delComment(Long id) {
-
-
-        return false;
+        int i = dao.delComment(id);
+        return i == 1;
     }
 }

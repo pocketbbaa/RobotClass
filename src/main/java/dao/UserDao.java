@@ -36,12 +36,13 @@ public interface UserDao {
                     @Param("password") String password, @Param("createTime") Date createTime);
 
     /**
-     * 校验账号密码是否正确
-     * @param account
+     * 校验用户信息正确性
+     * @param username
+     * @param email
      * @param password
      * @return
      */
-    int checkLogin(String account,String password);
+    int checkLogin(String username,String email,String password);
 
     /**
      * 根据ID获取用户信息

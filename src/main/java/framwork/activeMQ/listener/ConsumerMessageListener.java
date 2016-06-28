@@ -4,6 +4,7 @@ import javax.jms.Message;
 import javax.jms.MessageListener;
 
 /**
+ * 消息处理类
  * Created by admin on 2016/6/28.
  */
 public class ConsumerMessageListener implements MessageListener {
