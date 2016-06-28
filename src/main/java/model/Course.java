@@ -1,10 +1,12 @@
 package model;
 
+import java.io.Serializable;
+
 /**
  * 课程
  * Created by admin on 2016/6/27.
  */
-public class Course {
+public class Course implements Serializable{
 
     private Long id;
     private String name; //名字
