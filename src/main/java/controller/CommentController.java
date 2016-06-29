@@ -22,8 +22,8 @@ import java.util.Date;
  * 2、删除
  * Created by admin on 2016/6/28.
  */
-@RequestMapping("comment")
 @Controller
+@RequestMapping("comment")
 public class CommentController {
 
     @Autowired

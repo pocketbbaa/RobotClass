@@ -5,7 +5,7 @@
 
 <mapper namespace="dao.CourseDao">
 
-    <select id="getCourseById" parameterType="Long" resultType="Course">
+    <select id="getCourseById" parameterType="Long" resultType="List">
        SELECT
        (id,name,type,introduce,url,totalTime)
        FROM course
@@ -13,7 +13,7 @@
        id = #{id}
     </select>
 
-    <select id="getCourseListByPage" resultType="Course">
+    <select id="getCourseListByPage" resultType="List">
         SELECT
         (id,name,type,introduce,url,totalTime)
         FROM course

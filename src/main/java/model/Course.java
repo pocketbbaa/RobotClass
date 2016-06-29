@@ -6,7 +6,7 @@ import java.io.Serializable;
  * 课程
  * Created by admin on 2016/6/27.
  */
-public class Course implements Serializable{
+public class Course {
 
     private Long id;
     private String name; //名字

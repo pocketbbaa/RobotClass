@@ -5,7 +5,7 @@
 
 <mapper namespace="dao.VideoDao">
 
-    <select id="getVideoListByCourseId" resultType="Video">
+    <select id="getVideoListByCourseId" resultType="List">
         SELECT
         (id,name,video_id,video_url,course_id,introduce,time)
         FROM video

@@ -6,7 +6,7 @@ import java.io.Serializable;
  * 视频
  * Created by admin on 2016/6/27.
  */
-public class Video implements Serializable{
+public class Video {
 
     private Long id;
     private String name; //视频名字

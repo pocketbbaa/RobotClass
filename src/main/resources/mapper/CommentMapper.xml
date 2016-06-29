@@ -6,7 +6,7 @@
 <mapper namespace="dao.CommentDao">
 
 
-    <select id="getCommentListByPage" resultType="Comment">
+    <select id="getCommentListByPage" resultType="List">
         SELECT
         (id,text,create_time,user_id,Course_id)
         FROM comment

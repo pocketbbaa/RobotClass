@@ -1,13 +1,12 @@
 package model;
 
-import java.io.Serializable;
 import java.util.Date;
 
 /**
  * 评论
  * Created by admin on 2016/6/27.
  */
-public class Comment implements Serializable{
+public class Comment{
 
     private Long id;
     private String text; //评论类容

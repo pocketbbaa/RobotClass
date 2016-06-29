@@ -43,6 +43,11 @@
     <url-pattern>/*</url-pattern>
   </filter-mapping>
 
+  <context-param>
+    <param-name>kmRootKey</param-name>
+    <param-value>km.root</param-value>
+  </context-param>
+
 
   <welcome-file-list>
     <welcome-file>/index</welcome-file>
