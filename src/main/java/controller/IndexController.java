@@ -27,6 +27,7 @@ public class IndexController {
     @RequestMapping(value = "index")
     public ModelAndView showIndex(ModelMap map, HttpSession session) {
 
+        System.out.println("-----index-----");
         //课程列表数据
         List<Course> courseList = courseService.getCourseListByPage();
         map.put("courseList", courseList);

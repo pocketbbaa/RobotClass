@@ -50,7 +50,7 @@ public class CommentController {
         return new BaseResult(BaseResult.STATUS_OK, UserEnum.USER_ADDSUCCESS.getStateInfo());
     }
 
-    @RequestMapping(value = "/addComment", method = RequestMethod.POST)
+    @RequestMapping(value = "/delComment", method = RequestMethod.POST)
     @ResponseBody
     public BaseResult delComment(@PathVariable("id") Long id) {
 

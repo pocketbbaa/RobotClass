@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
 <!--引入jstl-->
-<%@include file="../common/tag.jsp" %>
-<%@include file="../common/head.jsp" %>
+<%@include file="common/tag.jsp" %>
+<%@include file="common/head.jsp" %>
 <!DOCTYPE html>
 <html>
 <head>

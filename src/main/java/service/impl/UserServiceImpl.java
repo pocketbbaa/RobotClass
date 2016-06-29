@@ -1,5 +1,6 @@
 package service.impl;
 
+import dao.UserDao;
 import model.User;
 import org.springframework.stereotype.Service;
 import service.UserService;

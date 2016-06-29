@@ -1,9 +1,12 @@
 package service.impl;
 
+import dao.CommentDao;
 import model.Comment;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import service.CommentService;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -11,6 +14,8 @@ import java.util.List;
  */
 @Service
 public class CommentServiceImpl implements CommentService {
+
+
 
 
     @Override
