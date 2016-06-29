@@ -6,7 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import service.CommentService;
 
+<<<<<<< HEAD
 import javax.annotation.Resource;
+=======
+import java.util.Date;
+>>>>>>> origin/master
 import java.util.List;
 
 /**
@@ -16,7 +20,12 @@ import java.util.List;
 public class CommentServiceImpl implements CommentService {
 
 
+<<<<<<< HEAD
 
+=======
+    @Autowired
+    private CommentDao dao;
+>>>>>>> origin/master
 
     @Override
     public List<Comment> getCommentListByPage(Long courseId) {
@@ -27,15 +36,13 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     public boolean addComment(Long userId, Long courseId, Comment comment) {
-
-
-        return false;
+        int i = dao.addComment(userId, courseId, comment.getText(), comment.getCreateTime());
+        return i == 1;
     }
 
     @Override
     public boolean delComment(Long id) {
-
-
-        return false;
+        int i = dao.delComment(id);
+        return i == 1;
     }
 }

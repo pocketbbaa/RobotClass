@@ -24,8 +24,8 @@ public class MailSenderTest {
 
         /* 使用情况一，正常使用 */
         MailSenderConfig c = new MailSenderConfig(SMTP_MAIL_HOST
-                , "aemail"
-                , "<h1>this is content</h1>", EMAIL_USERNAME);
+                , "测试邮件"
+                , "<h1>this is content这是我的测试邮件</h1>", EMAIL_USERNAME);
         c.setUsername(EMAIL_USERNAME);
         c.setPassword(EMAIL_PASSWORD);
         c.addToMail(TO_EMAIL_ADDRESS_1);
