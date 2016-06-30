@@ -27,7 +27,7 @@
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="robot" target="1.8" />
-      <module name="robot-web" target="1.7" />
+      <module name="robot-web" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

@@ -13,15 +13,15 @@
         <setting name= "cacheEnabled" value ="false" />
     </settings>
 
-    <!--<plugins >
+    <plugins >
         <plugin interceptor="interceptor.PagePlugin">
-            &lt;!&ndash;数据库方言&ndash;&gt;
+            <!--数据库方言-->
             <property name= "dialect" value ="mysql" />
-            &lt;!&ndash;mybatis的select标签的id包含"ByPage"才会被拦截&ndash;&gt;
+            <!--mybatis的select标签的id包含"ByPage"才会被拦截-->
             <property name= "pageSqlId" value =".*ByPage.*" />
             <property name= "groupSqld" value =".*ByGroupPage.*" />
         </plugin>
-    </plugins >-->
+    </plugins >
 
 
 </configuration>

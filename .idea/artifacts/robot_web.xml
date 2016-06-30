@@ -1,10 +1,10 @@
 <component name="ArtifactManager">
-  <artifact type="exploded-war" build-on-make="true" name="robot-web">
-    <output-path>$PROJECT_DIR$/target/robot-web-1.0-SNAPSHOT</output-path>
+  <artifact type="exploded-war" name="robot-web">
+    <output-path>$PROJECT_DIR$/out/artifacts/robot_web</output-path>
     <root id="root">
       <element id="directory" name="WEB-INF">
         <element id="directory" name="classes">
-          <element id="module-output" name="robot" />
+          <element id="module-output" name="robot-web" />
         </element>
         <element id="directory" name="lib">
           <element id="library" level="project" name="Maven: junit:junit:4.11" />
@@ -30,8 +30,6 @@
           <element id="library" level="project" name="Maven: org.springframework:spring-test:4.0.0.RELEASE" />
           <element id="library" level="project" name="Maven: jstl:jstl:1.2" />
           <element id="library" level="project" name="Maven: taglibs:standard:1.1.2" />
-          <element id="library" level="project" name="Maven: javax.servlet:javax.servlet-api:3.0.1" />
-          <element id="library" level="project" name="Maven: javax.servlet.jsp:javax.servlet.jsp-api:2.2.1" />
           <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-core:2.4.3" />
           <element id="library" level="project" name="Maven: commons-collections:commons-collections:3.2.1" />
           <element id="library" level="project" name="Maven: org.apache.activemq:activemq-core:5.7.0" />
@@ -51,10 +49,7 @@
           <element id="library" level="project" name="Maven: javax.mail:mail:1.4" />
         </element>
       </element>
-      <element id="directory" name="META-INF">
-        <element id="file-copy" path="$PROJECT_DIR$/target/robot-web-1.0-SNAPSHOT/META-INF/MANIFEST.MF" />
-      </element>
-      <element id="javaee-facet-resources" facet="robot/web/Web" />
+      <element id="javaee-facet-resources" facet="robot-web/web/Web" />
     </root>
   </artifact>
 </component>

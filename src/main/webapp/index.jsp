@@ -39,7 +39,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#page-top">Start Bootstrap</a>
+            <a class="navbar-brand" href="#page-top">I am ROBOT</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -49,13 +49,13 @@
                     <a href="#page-top"></a>
                 </li>
                 <li class="page-scroll">
-                    <a href="#portfolio">Portfolio</a>
+                    <a href="#portfolio">首页</a>
                 </li>
                 <li class="page-scroll">
-                    <a href="#about">About</a>
+                    <a href="#about">商城</a>
                 </li>
                 <li class="page-scroll">
-                    <a href="#contact">Contact</a>
+                    <a href="#contact">关于我们</a>
                 </li>
             </ul>
         </div>
@@ -69,11 +69,11 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
-                <img class="img-responsive" src="img/profile.png" alt="">
+                <img class="img-responsive" src="img/2.png" alt="">
                 <div class="intro-text">
-                    <span class="name">Start Bootstrap</span>
+                    <span class="name">跟着小Y学java</span>
                     <hr class="star-light">
-                    <span class="skills">Web Developer - Graphic Artist - User Experience Designer</span>
+                    <span class="skills">最有趣的学习，最炫酷的挑战</span>
                 </div>
             </div>
         </div>
@@ -86,7 +86,7 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-12 text-center">
-                <h2>Portfolio</h2>
+                <h2>精彩课程</h2>
                 <hr class="star-primary">
             </div>
         </div>
@@ -98,7 +98,7 @@
                             <i class="fa fa-search-plus fa-3x"></i>
                         </div>
                     </div>
-                    <img src="img/portfolio/cabin.png" class="img-responsive" alt="">
+                    <img src="img/portfolio/3.jpg" class="img-responsive" alt="">
                 </a>
             </div>
             <div class="col-sm-4 portfolio-item">

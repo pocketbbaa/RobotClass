@@ -15,8 +15,27 @@
         </sourceRoots>
       </configuration>
     </facet>
+    <facet type="Spring" name="Spring">
+      <configuration>
+        <fileset id="web application context" name="MVC application context" removed="true">
+          <file>file://$MODULE_DIR$/src/main/resources/spring/spring-dao.xml</file>
+          <file>file://$MODULE_DIR$/src/main/resources/spring/spring-web.xml</file>
+          <file>file://$MODULE_DIR$/src/main/resources/spring/spring-service.xml</file>
+        </fileset>
+        <fileset id="web robot servlet context" name="MVC robot servlet context" removed="true">
+          <file>file://$MODULE_DIR$/src/main/resources/spring/spring-dao.xml</file>
+          <file>file://$MODULE_DIR$/src/main/resources/spring/spring-web.xml</file>
+          <file>file://$MODULE_DIR$/src/main/resources/spring/spring-service.xml</file>
+        </fileset>
+        <fileset id="fileset" name="Spring robot-web Context" removed="false">
+          <file>file://$MODULE_DIR$/src/main/resources/spring/spring-dao.xml</file>
+          <file>file://$MODULE_DIR$/src/main/resources/spring/spring-service.xml</file>
+          <file>file://$MODULE_DIR$/src/main/resources/spring/spring-web.xml</file>
+        </fileset>
+      </configuration>
+    </facet>
   </component>
-  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_7" inherit-compiler-output="false">
+  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_8" inherit-compiler-output="false">
     <output url="file://$MODULE_DIR$/target/classes" />
     <output-test url="file://$MODULE_DIR$/target/test-classes" />
     <content url="file://$MODULE_DIR$">

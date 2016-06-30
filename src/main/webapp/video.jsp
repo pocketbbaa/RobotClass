@@ -27,7 +27,6 @@
     <![endif]-->
 </head>
 <body id="page-top" class="index">
-
 <!-- Navigation -->
 <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container">
@@ -64,81 +63,18 @@
     <!-- /.container-fluid -->
 </nav>
 
-<div style="width: auto;height: 50px;"></div>
+<div style="width: auto;height:130px;"></div>
 
-<!-- Portfolio Grid Section -->
-<section id="portfolio">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12 text-center">
-                <h2>选择你感兴趣的课程</h2>
-                <hr class="star-primary">
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-4 portfolio-item">
-                <a href="#portfolioModal1" class="portfolio-link" data-toggle="modal">
-                    <div class="caption">
-                        <div class="caption-content">
-                            <i class="fa fa-search-plus fa-3x"></i>
-                        </div>
-                    </div>
-                    <img src="img/portfolio/3.jpg" class="img-responsive" alt="">
-                </a>
-            </div>
-            <div class="col-sm-4 portfolio-item">
-                <a href="#portfolioModal2" class="portfolio-link" data-toggle="modal">
-                    <div class="caption">
-                        <div class="caption-content">
-                            <i class="fa fa-search-plus fa-3x"></i>
-                        </div>
-                    </div>
-                    <img src="img/portfolio/3.jpg" class="img-responsive" alt="">
-                </a>
-            </div>
-            <div class="col-sm-4 portfolio-item">
-                <a href="#portfolioModal3" class="portfolio-link" data-toggle="modal">
-                    <div class="caption">
-                        <div class="caption-content">
-                            <i class="fa fa-search-plus fa-3x"></i>
-                        </div>
-                    </div>
-                    <img src="img/portfolio/3.jpg" class="img-responsive" alt="">
-                </a>
-            </div>
-            <div class="col-sm-4 portfolio-item">
-                <a href="#portfolioModal4" class="portfolio-link" data-toggle="modal">
-                    <div class="caption">
-                        <div class="caption-content">
-                            <i class="fa fa-search-plus fa-3x"></i>
-                        </div>
-                    </div>
-                    <img src="img/portfolio/3.jpg" class="img-responsive" alt="">
-                </a>
-            </div>
-            <div class="col-sm-4 portfolio-item">
-                <a href="#portfolioModal5" class="portfolio-link" data-toggle="modal">
-                    <div class="caption">
-                        <div class="caption-content">
-                            <i class="fa fa-search-plus fa-3x"></i>
-                        </div>
-                    </div>
-                    <img src="img/portfolio/3.jpg" class="img-responsive" alt="">
-                </a>
-            </div>
-            <div class="col-sm-4 portfolio-item">
-                <a href="#portfolioModal6" class="portfolio-link" data-toggle="modal">
-                    <div class="caption">
-                        <div class="caption-content">
-                            <i class="fa fa-search-plus fa-3x"></i>
-                        </div>
-                    </div>
-                    <img src="img/portfolio/3.jpg" class="img-responsive" alt="">
-                </a>
-            </div>
-        </div>
-    </div>
-</section>
+<embed
+        src="http://www.tudou.com/v/I7C_srs6TYo&autoPlay=true&sp=http://u1.tdimg.com/4/9/109/_132871354797228249200039437700636015324.jpg&withRecommendList=true&startSeekPoint=0.5/v.swf"
+        type="application/x-shockwave-flash"
+        allowscriptaccess="always"
+        allowfullscreen="true"
+        wmode="opaque"
+        width="100%"
+        height="600"
+        id="tudouPlayer">
+</embed>
 
 <!-- Footer -->
 <footer class="text-center">
@@ -186,7 +122,6 @@
         </div>
     </div>
 </footer>
-
 
 
 <!-- jQuery -->
