@@ -49,10 +49,10 @@
                     <a href="#page-top"></a>
                 </li>
                 <li class="page-scroll">
-                    <a href="#portfolio">首页</a>
+                    <a href="index.jsp">首页</a>
                 </li>
                 <li class="page-scroll">
-                    <a href="#about">商城</a>
+                    <a href="choiceclass.jsp">商城</a>
                 </li>
                 <li class="page-scroll">
                     <a href="#contact">关于我们</a>
