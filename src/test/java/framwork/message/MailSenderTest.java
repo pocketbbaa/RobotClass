@@ -24,13 +24,13 @@ public class MailSenderTest {
 
         /* 使用情况一，正常使用 */
         MailSenderConfig c = new MailSenderConfig(SMTP_MAIL_HOST
-                , "测试邮件"
-                , "<h1>this is content这是我的测试邮件</h1>", EMAIL_USERNAME);
+                , "工作邮件"
+                , "<h1>今天完成项目的开发工作</h1>", EMAIL_USERNAME);
         c.setUsername(EMAIL_USERNAME);
         c.setPassword(EMAIL_PASSWORD);
         c.addToMail(TO_EMAIL_ADDRESS_1);
-        c.addCcMail(TO_EMAIL_ADDRESS_1);
-        c.addAttachment(new Attachment(new File("d:/1.txt")));
+        //c.addCcMail(TO_EMAIL_ADDRESS_1);
+        // c.addAttachment(new Attachment(new File("d:/1.txt")));
         MailSender ms = new MailSender(c);
         ms.send();
         System.out.println("sent...");

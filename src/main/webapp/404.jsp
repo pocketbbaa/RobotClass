@@ -1,7 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
-<c:set var="ctx" value="${pageContext.request.contextPath}"/>
+<c:set var="ctx" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
 <html>
 <head>
@@ -34,8 +34,7 @@
     <div class="container">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header page-scroll">
-            <button type="button" class="navbar-toggle" data-toggle="collapse"
-                    data-target="#bs-example-navbar-collapse-1">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                 <span class="sr-only">Toggle navigation</span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
@@ -71,23 +70,10 @@
 
 <div style="width: auto;height:130px;"></div>
 
-<div style="width: 100%;height: 50px;margin-top: 50px;">
-    <h1 style="margin-left: 50px;">${course.name},${course.introduce},${course.totalTime}</h1>
+<div style="width: 100%;height: 300px;margin-top: 300px;">
+    <h1 style="margin-left: 800px;">${message}</h1>
 </div>
 
-<!--视频播放区-->
-<c:forEach items="${videoList}" var="video">
-    <embed
-            src="${video.videoUrl}"
-            type="application/x-shockwave-flash"
-            allowscriptaccess="always"
-            allowfullscreen="true"
-            wmode="opaque"
-            width="100%"
-            height="600"
-            id="tudouPlayer">
-    </embed>
-</c:forEach>
 
 <!-- Footer -->
 <footer class="text-center">
@@ -129,9 +115,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                    Copyright &copy; 2016.Company name All rights reserved.<a target="_blank"
-                                                                              href="http://sc.chinaz.com/moban/">
-                    &#x7F51;&#x9875;&#x6A21;&#x677F;</a>
+                    Copyright &copy; 2016.Company name All rights reserved.<a target="_blank" href="http://sc.chinaz.com/moban/">&#x7F51;&#x9875;&#x6A21;&#x677F;</a>
                 </div>
             </div>
         </div>

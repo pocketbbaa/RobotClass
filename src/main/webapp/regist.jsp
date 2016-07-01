@@ -1,5 +1,7 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
+<c:set var="ctx" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
 <html>
 <head>
@@ -38,7 +40,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#page-top">最有趣的学习</a>
+            <a class="navbar-brand" href="#page-top">I am ROBOT</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -48,13 +50,16 @@
                     <a href="#page-top"></a>
                 </li>
                 <li class="page-scroll">
-                    <a href="#portfolio">首页</a>
+                    <a href="${ctx}/index.jsp">首页</a>
                 </li>
                 <li class="page-scroll">
-                    <a href="#about">商城</a>
+                    <a href="${ctx}/choiceclass.jsp">课程</a>
                 </li>
                 <li class="page-scroll">
                     <a href="#contact">关于我们</a>
+                </li>
+                <li class="page-scroll">
+                    <a href="${ctx}/login.jsp">登录</a>
                 </li>
             </ul>
         </div>
@@ -78,18 +83,11 @@
             <div class="col-lg-8 col-lg-offset-2">
                 <!-- To configure the contact form email address, go to mail/contact_me.php and update the email address in the PHP file on line 19. -->
                 <!-- The form should work on most web servers, but if the form is not working you may need to configure your web server differently. -->
-                <form name="sentMessage" id="contactForm" novalidate>
+                <form name="sentMessage" id="contactForm" novalidate action="index.jsp" >
                     <div class="row control-group">
                         <div class="form-group col-xs-12 floating-label-form-group controls">
                             <label>电话</label>
                             <input type="text" class="form-control" placeholder="电话" id="phone" required data-validation-required-message="请输入你的电话.">
-                            <p class="help-block text-danger"></p>
-                        </div>
-                    </div>
-                    <div class="row control-group">
-                        <div class="form-group col-xs-12 floating-label-form-group controls">
-                            <label>邮箱</label>
-                            <input type="email" class="form-control" placeholder="邮箱" id="email" required data-validation-required-message="请输入你的邮箱.">
                             <p class="help-block text-danger"></p>
                         </div>
                     </div>

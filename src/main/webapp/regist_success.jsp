@@ -13,11 +13,11 @@
 
     <title>HOME</title>
 
-    <link href="${ctx}/css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
 
-    <link href="${ctx}/css/freelancer.css" rel="stylesheet">
+    <link href="css/freelancer.css" rel="stylesheet">
 
-    <link href="${ctx}/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="http://fonts.useso.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
     <link href="http://fonts.useso.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
 
@@ -69,25 +69,15 @@
     <!-- /.container-fluid -->
 </nav>
 
-<div style="width: auto;height:130px;"></div>
 
-<div style="width: 100%;height: 50px;margin-top: 50px;">
-    <h1 style="margin-left: 50px;">${course.name},${course.introduce},${course.totalTime}</h1>
+<div style="width: auto;height: 50px;"></div>
+
+
+
+<div style="width: 100%;height: 300px;margin-top: 300px;" >
+    <h1 style="margin-left: 800px;"><a href="${ctx}/index">注册成功,返回首页</a></h1>
 </div>
 
-<!--视频播放区-->
-<c:forEach items="${videoList}" var="video">
-    <embed
-            src="${video.videoUrl}"
-            type="application/x-shockwave-flash"
-            allowscriptaccess="always"
-            allowfullscreen="true"
-            wmode="opaque"
-            width="100%"
-            height="600"
-            id="tudouPlayer">
-    </embed>
-</c:forEach>
 
 <!-- Footer -->
 <footer class="text-center">
@@ -140,22 +130,22 @@
 
 
 <!-- jQuery -->
-<script src="${ctx}/js/jquery.js"></script>
+<script src="js/jquery.js"></script>
 
 <!-- Bootstrap Core JavaScript -->
-<script src="${ctx}/js/bootstrap.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
 
 <!-- Plugin JavaScript -->
 <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
-<script src="${ctx}/js/classie.js"></script>
-<script src="${ctx}/js/cbpAnimatedHeader.js"></script>
+<script src="js/classie.js"></script>
+<script src="js/cbpAnimatedHeader.js"></script>
 
 <!-- Contact Form JavaScript -->
-<script src="${ctx}/js/jqBootstrapValidation.js"></script>
-<script src="${ctx}/js/contact_me.js"></script>
+<script src="js/jqBootstrapValidation.js"></script>
+<script src="js/contact_me.js"></script>
 
 <!-- Custom Theme JavaScript -->
-<script src="${ctx}/js/freelancer.js"></script>
+<script src="js/freelancer.js"></script>
 
 </body>
 </html>

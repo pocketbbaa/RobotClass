@@ -11,7 +11,11 @@ public enum UserEnum {
     USER_PARAMEERROR(3, "参数错误"),
     USER_NOJD(4,"没有权限"),
     USER_ADDERROR(5,"添加用户失败"),
-    USER_ADDSUCCESS(6,"添加用户成功");
+    USER_ADDSUCCESS(6,"添加用户成功"),
+    EMAIL_EXIST(7,"该邮箱已被注册"),
+    EMAIL_ERROR(8,"邮箱有误"),
+    USERNAME_EXIST(9,"用户名已存在"),
+    EMAIL_NOTRIGHT(10,"邮箱格式不正确");
 
 
     private int state;

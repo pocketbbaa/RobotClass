@@ -5,6 +5,7 @@ import model.Course;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import service.CourseService;
+import utils.Page;
 
 import java.util.List;
 
@@ -18,15 +19,24 @@ public class CourseServiceImpl implements CourseService {
     private CourseDao dao;
 
     @Override
-    public List<Course> getCourseListByPage() {
+    public Page<Course> getCourseListByPage(Integer pageIndex, Integer pageSize) {
 
-        return null;
+        Page<Course> page = new Page<>(pageIndex, pageSize);
+        List<Course> courseList = dao.getCourseListByPage(page);
+        page.setResult(courseList);
+        return page;
     }
 
 
     @Override
     public Course getCourseById(Long id) {
 
-        return null;
+        return dao.getCourseById(id);
+    }
+
+    @Override
+    public List<Course> getCourseTopN(int top) {
+
+        return dao.getCourseTopN(top);
     }
 }

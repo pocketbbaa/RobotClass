@@ -1,5 +1,7 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
+<c:set var="ctx" value="${pageContext.request.contextPath}"/>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,11 +13,11 @@
 
     <title>HOME</title>
 
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="${ctx}/css/bootstrap.min.css" rel="stylesheet">
 
-    <link href="css/freelancer.css" rel="stylesheet">
+    <link href="${ctx}/css/freelancer.css" rel="stylesheet">
 
-    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="${ctx}/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="http://fonts.useso.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
     <link href="http://fonts.useso.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
 
@@ -33,13 +35,14 @@
     <div class="container">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header page-scroll">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+            <button type="button" class="navbar-toggle" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1">
                 <span class="sr-only">Toggle navigation</span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#page-top">最有趣的学习</a>
+            <a class="navbar-brand" href="#page-top">I am ROBOT</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -49,13 +52,16 @@
                     <a href="#page-top"></a>
                 </li>
                 <li class="page-scroll">
-                    <a href="index.jsp">首页</a>
+                    <a href="${ctx}/index.jsp">首页</a>
                 </li>
                 <li class="page-scroll">
-                    <a href="choiceclass.jsp">商城</a>
+                    <a href="${ctx}/choiceclass.jsp">课程</a>
                 </li>
                 <li class="page-scroll">
                     <a href="#contact">关于我们</a>
+                </li>
+                <li class="page-scroll">
+                    <a href="${ctx}/login.jsp">登录</a>
                 </li>
             </ul>
         </div>
@@ -76,68 +82,61 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-sm-4 portfolio-item">
-                <a href="#portfolioModal1" class="portfolio-link" data-toggle="modal">
-                    <div class="caption">
-                        <div class="caption-content">
-                            <i class="fa fa-search-plus fa-3x"></i>
+            <c:forEach items="${coursePage.courseList}" var="course">
+                <div class="col-sm-4 portfolio-item">
+                    <a href="${ctx}/course/${course.id}/detail" class="portfolio-link" data-toggle="modal">
+                        <div class="caption">
+                            <div class="caption-content">
+                                <i class="fa fa-search-plus fa-3x"></i>
+                            </div>
                         </div>
-                    </div>
-                    <img src="img/portfolio/3.jpg" class="img-responsive" alt="">
-                </a>
-            </div>
-            <div class="col-sm-4 portfolio-item">
-                <a href="#portfolioModal2" class="portfolio-link" data-toggle="modal">
-                    <div class="caption">
-                        <div class="caption-content">
-                            <i class="fa fa-search-plus fa-3x"></i>
-                        </div>
-                    </div>
-                    <img src="img/portfolio/3.jpg" class="img-responsive" alt="">
-                </a>
-            </div>
-            <div class="col-sm-4 portfolio-item">
-                <a href="#portfolioModal3" class="portfolio-link" data-toggle="modal">
-                    <div class="caption">
-                        <div class="caption-content">
-                            <i class="fa fa-search-plus fa-3x"></i>
-                        </div>
-                    </div>
-                    <img src="img/portfolio/3.jpg" class="img-responsive" alt="">
-                </a>
-            </div>
-            <div class="col-sm-4 portfolio-item">
-                <a href="#portfolioModal4" class="portfolio-link" data-toggle="modal">
-                    <div class="caption">
-                        <div class="caption-content">
-                            <i class="fa fa-search-plus fa-3x"></i>
-                        </div>
-                    </div>
-                    <img src="img/portfolio/3.jpg" class="img-responsive" alt="">
-                </a>
-            </div>
-            <div class="col-sm-4 portfolio-item">
-                <a href="#portfolioModal5" class="portfolio-link" data-toggle="modal">
-                    <div class="caption">
-                        <div class="caption-content">
-                            <i class="fa fa-search-plus fa-3x"></i>
-                        </div>
-                    </div>
-                    <img src="img/portfolio/3.jpg" class="img-responsive" alt="">
-                </a>
-            </div>
-            <div class="col-sm-4 portfolio-item">
-                <a href="#portfolioModal6" class="portfolio-link" data-toggle="modal">
-                    <div class="caption">
-                        <div class="caption-content">
-                            <i class="fa fa-search-plus fa-3x"></i>
-                        </div>
-                    </div>
-                    <img src="img/portfolio/3.jpg" class="img-responsive" alt="">
-                </a>
-            </div>
+                        <img src="${ctx}/img/portfolio/3.jpg" class="img-responsive" alt="">
+                    </a>
+                    <h2 style="margin-left: 60px;">${course.name}</h2>
+                </div>
+            </c:forEach>
         </div>
     </div>
+
+    <!--分页-->
+    <nav style="text-align: center">
+        <ul class="pagination pagination-lg">
+            <li>
+                <c:choose>
+                    <c:when test="${coursePage.pageNo eq 1}">
+                        <a href="${ctx}/course/1/list" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </c:when>
+                    <c:otherwise>
+                        <a href="${ctx}/course/${coursePage.pageNo-1}/list" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </c:otherwise>
+                </c:choose>
+            </li>
+            <li><a href="${ctx}/course/1/list">1</a></li>
+            <c:forEach var="i" begin="2" end="${coursePage.totalPage}">
+                <li><a href="${ctx}/course/${i}/list">${i}</a></li>
+            </c:forEach>
+            <li>
+                <c:choose>
+                    <c:when test="${coursePage.pageNo eq coursePage.totalPage}">
+                        <a href="${ctx}/course/${coursePage.totalPage}/list" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </c:when>
+                    <c:otherwise>
+                        <a href="${ctx}/course/${coursePage.pageNo+1}/list" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </c:otherwise>
+                </c:choose>
+
+            </li>
+        </ul>
+    </nav>
+
 </section>
 
 <!-- Footer -->
@@ -180,7 +179,9 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                    Copyright &copy; 2016.Company name All rights reserved.<a target="_blank" href="http://sc.chinaz.com/moban/">&#x7F51;&#x9875;&#x6A21;&#x677F;</a>
+                    Copyright &copy; 2016.Company name All rights reserved.<a target="_blank"
+                                                                              href="http://sc.chinaz.com/moban/">
+                    &#x7F51;&#x9875;&#x6A21;&#x677F;</a>
                 </div>
             </div>
         </div>
@@ -188,24 +189,23 @@
 </footer>
 
 
-
 <!-- jQuery -->
-<script src="js/jquery.js"></script>
+<script src="${ctx}/js/jquery.js"></script>
 
 <!-- Bootstrap Core JavaScript -->
-<script src="js/bootstrap.min.js"></script>
+<script src="${ctx}/js/bootstrap.min.js"></script>
 
 <!-- Plugin JavaScript -->
 <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
-<script src="js/classie.js"></script>
-<script src="js/cbpAnimatedHeader.js"></script>
+<script src="${ctx}/js/classie.js"></script>
+<script src="${ctx}/js/cbpAnimatedHeader.js"></script>
 
 <!-- Contact Form JavaScript -->
-<script src="js/jqBootstrapValidation.js"></script>
-<script src="js/contact_me.js"></script>
+<script src="${ctx}/js/jqBootstrapValidation.js"></script>
+<script src="${ctx}/js/contact_me.js"></script>
 
 <!-- Custom Theme JavaScript -->
-<script src="js/freelancer.js"></script>
+<script src="${ctx}/js/freelancer.js"></script>
 
 </body>
 </html>

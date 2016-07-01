@@ -69,25 +69,15 @@
     <!-- /.container-fluid -->
 </nav>
 
-<div style="width: auto;height:130px;"></div>
 
-<div style="width: 100%;height: 50px;margin-top: 50px;">
-    <h1 style="margin-left: 50px;">${course.name},${course.introduce},${course.totalTime}</h1>
+<div style="width: auto;height: 50px;"></div>
+
+
+
+<div style="width: 100%;height: 300px;margin-top: 300px;" >
+    <h1 style="margin-left: 800px;">请查看邮箱完成验证</h1>
 </div>
 
-<!--视频播放区-->
-<c:forEach items="${videoList}" var="video">
-    <embed
-            src="${video.videoUrl}"
-            type="application/x-shockwave-flash"
-            allowscriptaccess="always"
-            allowfullscreen="true"
-            wmode="opaque"
-            width="100%"
-            height="600"
-            id="tudouPlayer">
-    </embed>
-</c:forEach>
 
 <!-- Footer -->
 <footer class="text-center">

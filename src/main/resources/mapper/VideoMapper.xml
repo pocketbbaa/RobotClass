@@ -5,9 +5,9 @@
 
 <mapper namespace="dao.VideoDao">
 
-    <select id="getVideoListByCourseId" resultType="List">
+    <select id="getVideoListByCourseId" resultType="Video">
         SELECT
-        (id,name,video_id,video_url,course_id,introduce,time)
+        id,name,video_id,video_url,course_id,introduce,time
         FROM video
         WHERE
         course_id = #{courseId}

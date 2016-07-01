@@ -69,25 +69,48 @@
     <!-- /.container-fluid -->
 </nav>
 
-<div style="width: auto;height:130px;"></div>
 
-<div style="width: 100%;height: 50px;margin-top: 50px;">
-    <h1 style="margin-left: 50px;">${course.name},${course.introduce},${course.totalTime}</h1>
-</div>
+<div style="width: auto;height: 150px;"></div>
+<!-- Contact Section -->
+<section id="contact">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h2>注册一个号，加入我们</h2>
+                <hr class="star-primary">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2">
+                <!-- To configure the contact form email address, go to mail/contact_me.php and update the email address in the PHP file on line 19. -->
+                <!-- The form should work on most web servers, but if the form is not working you may need to configure your web server differently. -->
+                <form action="/user/sendEmail" method="post">
+                    <div class="row control-group">
+                        <div class="form-group col-xs-12 floating-label-form-group controls">
+                            <label>邮箱</label>
+                            <input type="email" class="form-control" placeholder="邮箱" id="email" name="email" required
+                                   data-validation-required-message="请输入你的邮箱.">
+                            <p class="help-block text-danger"></p>
+                        </div>
+                    </div>
+                    <br>
+                    <div id="success"></div>
+                    <div class="row">
+                        <div class="form-group col-xs-12">
+                            <button type="submit" class="btn btn-success btn-lg">下一步</button>
+                        </div>
+                        <c:if test="${!empty message}">
+                            <h3><span class="label label-danger">
+                                    ${message}
+                            </span></h3>
+                        </c:if>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
 
-<!--视频播放区-->
-<c:forEach items="${videoList}" var="video">
-    <embed
-            src="${video.videoUrl}"
-            type="application/x-shockwave-flash"
-            allowscriptaccess="always"
-            allowfullscreen="true"
-            wmode="opaque"
-            width="100%"
-            height="600"
-            id="tudouPlayer">
-    </embed>
-</c:forEach>
 
 <!-- Footer -->
 <footer class="text-center">

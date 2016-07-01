@@ -1,5 +1,7 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
+<c:set var="ctx" value="${pageContext.request.contextPath}"/>
 <!DOCTYPE html>
 <html>
 <head>
@@ -32,13 +34,14 @@
     <div class="container">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header page-scroll">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+            <button type="button" class="navbar-toggle" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1">
                 <span class="sr-only">Toggle navigation</span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#page-top">最有趣的学习</a>
+            <a class="navbar-brand" href="#page-top">I am ROBOT</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -48,13 +51,16 @@
                     <a href="#page-top"></a>
                 </li>
                 <li class="page-scroll">
-                    <a href="#portfolio">首页</a>
+                    <a href="${ctx}/index.jsp">首页</a>
                 </li>
                 <li class="page-scroll">
-                    <a href="#about">商城</a>
+                    <a href="${ctx}/choiceclass.jsp">课程</a>
                 </li>
                 <li class="page-scroll">
                     <a href="#contact">关于我们</a>
+                </li>
+                <li class="page-scroll">
+                    <a href="${ctx}/login.jsp">登录</a>
                 </li>
             </ul>
         </div>
@@ -82,14 +88,16 @@
                     <div class="row control-group">
                         <div class="form-group col-xs-12 floating-label-form-group controls">
                             <label>账号</label>
-                            <input type="text" class="form-control" placeholder="电话/邮箱" id="phone" required data-validation-required-message="请输入你的账号.">
+                            <input type="text" class="form-control" placeholder="电话/邮箱" id="phone" required
+                                   data-validation-required-message="请输入你的账号.">
                             <p class="help-block text-danger"></p>
                         </div>
                     </div>
                     <div class="row control-group">
                         <div class="form-group col-xs-12 floating-label-form-group controls">
                             <label>密码</label>
-                            <input type="tel" class="form-control" placeholder="密码" id="password" required data-validation-required-message="请输入你的密码.">
+                            <input type="tel" class="form-control" placeholder="密码" id="password" required
+                                   data-validation-required-message="请输入你的密码.">
                             <p class="help-block text-danger"></p>
                         </div>
                     </div>
@@ -101,13 +109,15 @@
                         </div>
                     </div>
                 </form>
+                <div class="row">
+                    <div class="form-group col-xs-12">
+                        <a type="button" class="btn btn-success btn-lg" href="${ctx}/regist_1.jsp">注册</a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </section>
-
-
-
 
 
 <!-- Footer -->
@@ -150,7 +160,9 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                    Copyright &copy; 2016.Company name All rights reserved.<a target="_blank" href="http://sc.chinaz.com/moban/">&#x7F51;&#x9875;&#x6A21;&#x677F;</a>
+                    Copyright &copy; 2016.Company name All rights reserved.<a target="_blank"
+                                                                              href="http://sc.chinaz.com/moban/">
+                    &#x7F51;&#x9875;&#x6A21;&#x677F;</a>
                 </div>
             </div>
         </div>

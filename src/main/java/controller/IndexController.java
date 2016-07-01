@@ -27,9 +27,10 @@ public class IndexController {
     @RequestMapping(value = "index")
     public ModelAndView showIndex(ModelMap map, HttpSession session) {
 
+        int top = 3;
         System.out.println("-----index-----");
         //课程列表数据
-        List<Course> courseList = courseService.getCourseListByPage();
+        List<Course> courseList = courseService.getCourseTopN(top);
         map.put("courseList", courseList);
 
         //登录后展示用户信息

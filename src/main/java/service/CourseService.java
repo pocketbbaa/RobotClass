@@ -1,6 +1,7 @@
 package service;
 
 import model.Course;
+import utils.Page;
 
 import java.util.List;
 
@@ -13,7 +14,7 @@ public interface CourseService {
      * 获取课程分页列表
      * @return
      */
-    List<Course> getCourseListByPage();
+    Page<Course> getCourseListByPage(Integer pageIndex, Integer pageSize);
 
     /**
      * 根据ID获取课程详情
@@ -21,6 +22,13 @@ public interface CourseService {
      * @return
      */
     Course getCourseById(Long id);
+
+    /**
+     * 获取课程列表topN
+     * @param top
+     * @return
+     */
+    List<Course> getCourseTopN(int top);
 
 
 

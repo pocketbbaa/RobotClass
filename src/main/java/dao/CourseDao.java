@@ -1,6 +1,7 @@
 package dao;
 
 import model.Course;
+import utils.Page;
 
 import java.util.List;
 
@@ -20,5 +21,12 @@ public interface CourseDao {
      * 获取课程分页信息
      * @return
      */
-    List<Course> getCourseListByPage();
+    List<Course> getCourseListByPage(Page<Course> page);
+
+    /**
+     * 获取课程列表topN
+     * @param top
+     * @return
+     */
+    List<Course> getCourseTopN(int top);
 }

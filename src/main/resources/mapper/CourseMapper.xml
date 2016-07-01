@@ -5,18 +5,26 @@
 
 <mapper namespace="dao.CourseDao">
 
-    <select id="getCourseById" parameterType="Long" resultType="List">
+    <select id="getCourseById" parameterType="Long" resultType="Course">
        SELECT
-       (id,name,type,introduce,url,totalTime)
+       id,name,type,introduce,url,total_time
        FROM course
        WHERE
        id = #{id}
     </select>
 
-    <select id="getCourseListByPage" resultType="List">
+    <select id="getCourseListByPage" resultType="Course">
         SELECT
-        (id,name,type,introduce,url,totalTime)
+        id,name,type,introduce,url,total_time
         FROM course
+        ORDER BY id ASC
+    </select>
+
+    <select id="getCourseTopN" resultType="Course">
+        select
+        id,name,type,introduce,url,total_time
+        from course
+        limit #{top}
     </select>
 
 

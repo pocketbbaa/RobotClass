@@ -8,14 +8,13 @@ import model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 import service.UserService;
 import utils.RegexUtil;
 import vo.BaseResult;
 
+import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.util.Date;
 
@@ -41,7 +40,11 @@ public class UserController {
         return "/login";
     }
 
-
+    /**
+     * 异步校验用户名
+     * @param username
+     * @return
+     */
     @RequestMapping(value = "/checkUsername", method = RequestMethod.POST)
     @ResponseBody
     public BaseResult checkUsername(@PathVariable("username") String username) {
@@ -58,6 +61,11 @@ public class UserController {
         return new BaseResult(BaseResult.STATUS_OK);
     }
 
+    /**
+     * 异步校验密码
+     * @param password
+     * @return
+     */
     @RequestMapping(value = "/checkPassword", method = RequestMethod.POST)
     @ResponseBody
     public BaseResult checkPassword(@PathVariable("password") String password) {
@@ -71,6 +79,11 @@ public class UserController {
         return new BaseResult(BaseResult.STATUS_OK);
     }
 
+    /**
+     * 异步校验邮箱
+     * @param email
+     * @return
+     */
     @RequestMapping(value = "/checkEmail", method = RequestMethod.POST)
     @ResponseBody
     public BaseResult checkEmail(@PathVariable("email") String email) {
@@ -87,19 +100,66 @@ public class UserController {
         return new BaseResult(BaseResult.STATUS_OK);
     }
 
-    @RequestMapping(value = "/addUser", method = RequestMethod.POST)
-    public String addUser(@PathVariable("username") String username, @PathVariable("password") String password,
-                         @PathVariable("email") String email, ModelMap map) throws Exception {
+    /**
+     * 注册第一步：校验邮箱，发送验证邮件
+     * @param email
+     * @param map
+     * @return
+     */
+    @RequestMapping(value = "/sendEmail", method = RequestMethod.POST)
+    public ModelAndView sendEmail(@RequestParam("email") String email, ModelMap map, HttpSession session) {
+        if(email == null){
+            map.put("message",UserEnum.EMAIL_ERROR.getStateInfo());
+            return new ModelAndView("/regist_1",map);
+        }
 
+        System.out.println(RegexUtil.checkEmail(email));
+
+        if(!RegexUtil.checkEmail(email)){
+            map.put("message",UserEnum.EMAIL_NOTRIGHT.getStateInfo());
+            return new ModelAndView("/regist_1",map);
+        }
+        if(userService.emailExist(email)){
+            map.put("message",UserEnum.EMAIL_EXIST.getStateInfo());
+            return new ModelAndView("/regist_1",map);
+        }
+        //将用户邮箱存入session
+        session.setAttribute("email",email);
+        //发送邮件消息
+
+        return new ModelAndView("/regist_2",map);
+    }
+
+    /**
+     * 添加用户
+     * @param username
+     * @param password
+     * @param map
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(value = "/addUser", method = RequestMethod.POST)
+    public ModelAndView addUser(@PathVariable("username") String username, @PathVariable("password") String password,
+                           ModelMap map,HttpSession session) throws Exception {
+
+        String email = (String) session.getAttribute("email");
         if (username == null || password == null || email == null) {
-            return "redirect:/user/toRegist";
+            map.put("message",UserEnum.USER_PARAMEERROR.getStateInfo());
+            return new ModelAndView("/regist",map);
         }
         if (!RegexUtil.checkUsername(username) || !RegexUtil.checkPassword(password) || !RegexUtil.checkEmail(email)) {
-            return "redirect:/user/toRegist";
+            map.put("message",UserEnum.USER_PARAMEERROR.getStateInfo());
+            return new ModelAndView("/regist",map);
         }
-        if (!userService.usernameExist(username) || !userService.emailExist(email)) {
-            return "redirect:/user/toRegist";
+        if (userService.usernameExist(username)) {
+            map.put("message",UserEnum.USERNAME_EXIST.getStateInfo());
+            return new ModelAndView("/regist",map);
         }
+        if(userService.emailExist(email)){
+            map.put("message",UserEnum.EMAIL_EXIST.getStateInfo());
+            return new ModelAndView("/regist",map);
+        }
+
         User user = new User();
         user.setUsername(username);
         user.setPassword(password);
@@ -107,27 +167,12 @@ public class UserController {
         user.setCreateTime(new Date());
 
         if (!userService.regist(user)) {
-            return "redirect:/user/toRegist";
+            map.put("message",UserEnum.USER_ADDERROR.getStateInfo());
+            return new ModelAndView("/regist",map);
         }
         //TODO 发送邮件验证
-        String SMTP_MAIL_HOST = "smtp.163.com";// 此邮件服务器地址
-        String EMAIL_USERNAME = "11133115wyd@163.com";
-        String EMAIL_PASSWORD = "11133115";
-        String TO_EMAIL_ADDRESS_1 = email;
 
-        MailSenderConfig c = new MailSenderConfig(SMTP_MAIL_HOST
-                , "激活账户邮件"
-                , "<h3>请点击下面的链接激活你的账户</h3><dr/><a href=''></a>"
-                , EMAIL_USERNAME);
-        c.setUsername(EMAIL_USERNAME);
-        c.setPassword(EMAIL_PASSWORD);
-        c.addToMail(TO_EMAIL_ADDRESS_1);
-        c.addCcMail(TO_EMAIL_ADDRESS_1);
-        c.addAttachment(new Attachment(new File("d:/1.txt")));
-        MailSender ms = new MailSender(c);
-        ms.send();
-
-        return "/sendemail";
+        return new ModelAndView("/regist_3");
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
@@ -141,16 +186,16 @@ public class UserController {
         }
         if (RegexUtil.checkUsername(account)) {
             username = account;
-        }else if (RegexUtil.checkEmail(account)) {
+        } else if (RegexUtil.checkEmail(account)) {
             email = account;
-        }else{
+        } else {
             return "redirect:/user/toLogin";
         }
         User user = new User();
         user.setUsername(username);
         user.setEmail(email);
         user.setPassword(password);
-        if(!userService.login(user)){
+        if (!userService.login(user)) {
             return "redirect:/user/toLogin";
         }
         return "/index";
