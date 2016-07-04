@@ -184,9 +184,8 @@ public class UserController {
             map.put("message", UserEnum.USER_ADDERROR.getStateInfo());
             return new ModelAndView("/regist", map);
         }
-        //TODO 发送邮件验证
 
-        return new ModelAndView("/regist_3");
+        return new ModelAndView("/regist_success");
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
