@@ -1,6 +1,7 @@
 package controller;
 
 import enums.UserEnum;
+import exception.MQException;
 import framwork.message.Attachment;
 import framwork.message.MailSender;
 import framwork.message.MailSenderConfig;
@@ -42,6 +43,7 @@ public class UserController {
 
     /**
      * 异步校验用户名
+     *
      * @param username
      * @return
      */
@@ -63,6 +65,7 @@ public class UserController {
 
     /**
      * 异步校验密码
+     *
      * @param password
      * @return
      */
@@ -81,6 +84,7 @@ public class UserController {
 
     /**
      * 异步校验邮箱
+     *
      * @param email
      * @return
      */
@@ -102,73 +106,83 @@ public class UserController {
 
     /**
      * 注册第一步：校验邮箱，发送验证邮件
+     *
      * @param email
      * @param map
      * @return
      */
     @RequestMapping(value = "/sendEmail", method = RequestMethod.POST)
     public ModelAndView sendEmail(@RequestParam("email") String email, ModelMap map, HttpSession session) {
-        if(email == null){
-            map.put("message",UserEnum.EMAIL_ERROR.getStateInfo());
-            return new ModelAndView("/regist_1",map);
+        if (email == null) {
+            map.put("message", UserEnum.EMAIL_ERROR.getStateInfo());
+            return new ModelAndView("/regist_1", map);
         }
 
         System.out.println(RegexUtil.checkEmail(email));
 
-        if(!RegexUtil.checkEmail(email)){
-            map.put("message",UserEnum.EMAIL_NOTRIGHT.getStateInfo());
-            return new ModelAndView("/regist_1",map);
+        if (!RegexUtil.checkEmail(email)) {
+            map.put("message", UserEnum.EMAIL_NOTRIGHT.getStateInfo());
+            return new ModelAndView("/regist_1", map);
         }
-        if(userService.emailExist(email)){
-            map.put("message",UserEnum.EMAIL_EXIST.getStateInfo());
-            return new ModelAndView("/regist_1",map);
+        if (userService.emailExist(email)) {
+            map.put("message", UserEnum.EMAIL_EXIST.getStateInfo());
+            return new ModelAndView("/regist_1", map);
         }
         //将用户邮箱存入session
-        session.setAttribute("email",email);
-        //发送邮件消息
+        session.setAttribute("email", email);
 
-        return new ModelAndView("/regist_2",map);
+        //TODO 发送邮件消息
+        try {
+            //发送MQ消息
+            userService.sendMessage(email);
+        } catch (MQException e) {
+            e.printStackTrace();
+            return new ModelAndView("/404");
+        }
+
+        return new ModelAndView("/regist_2", map);
     }
 
     /**
      * 添加用户
-     * @param username
+     *
+     * @param phone
      * @param password
      * @param map
      * @return
      * @throws Exception
      */
     @RequestMapping(value = "/addUser", method = RequestMethod.POST)
-    public ModelAndView addUser(@PathVariable("username") String username, @PathVariable("password") String password,
-                           ModelMap map,HttpSession session) throws Exception {
+    public ModelAndView addUser(@PathVariable("phone") String phone, @PathVariable("password") String password,
+                                ModelMap map, HttpSession session) throws Exception {
 
         String email = (String) session.getAttribute("email");
-        if (username == null || password == null || email == null) {
-            map.put("message",UserEnum.USER_PARAMEERROR.getStateInfo());
-            return new ModelAndView("/regist",map);
+        if (phone == null || password == null || email == null) {
+            map.put("message", UserEnum.USER_PARAMEERROR.getStateInfo());
+            return new ModelAndView("/regist", map);
         }
-        if (!RegexUtil.checkUsername(username) || !RegexUtil.checkPassword(password) || !RegexUtil.checkEmail(email)) {
-            map.put("message",UserEnum.USER_PARAMEERROR.getStateInfo());
-            return new ModelAndView("/regist",map);
+        if (!RegexUtil.checkCellphone(phone) || !RegexUtil.checkPassword(password) || !RegexUtil.checkEmail(email)) {
+            map.put("message", UserEnum.USER_PARAMEERROR.getStateInfo());
+            return new ModelAndView("/regist", map);
         }
-        if (userService.usernameExist(username)) {
-            map.put("message",UserEnum.USERNAME_EXIST.getStateInfo());
-            return new ModelAndView("/regist",map);
+        if (userService.phoneExist(phone)) {
+            map.put("message", UserEnum.USERNAME_EXIST.getStateInfo());
+            return new ModelAndView("/regist", map);
         }
-        if(userService.emailExist(email)){
-            map.put("message",UserEnum.EMAIL_EXIST.getStateInfo());
-            return new ModelAndView("/regist",map);
+        if (userService.emailExist(email)) {
+            map.put("message", UserEnum.EMAIL_EXIST.getStateInfo());
+            return new ModelAndView("/regist", map);
         }
 
         User user = new User();
-        user.setUsername(username);
+        user.setPhone(phone);
         user.setPassword(password);
         user.setEmail(email);
         user.setCreateTime(new Date());
 
         if (!userService.regist(user)) {
-            map.put("message",UserEnum.USER_ADDERROR.getStateInfo());
-            return new ModelAndView("/regist",map);
+            map.put("message", UserEnum.USER_ADDERROR.getStateInfo());
+            return new ModelAndView("/regist", map);
         }
         //TODO 发送邮件验证
 
@@ -176,29 +190,30 @@ public class UserController {
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public String login(@PathVariable("account") String account, @PathVariable("password") String password) {
+    public String login(@RequestParam("account") String account, @RequestParam("password") String password, HttpSession session) {
 
-        String username = null;
+        String phone = null;
         String email = null;
 
         if (account == null || password == null) {
             return "redirect:/user/toLogin";
         }
-        if (RegexUtil.checkUsername(account)) {
-            username = account;
+        if (RegexUtil.checkCellphone(account)) {
+            phone = account;
         } else if (RegexUtil.checkEmail(account)) {
             email = account;
         } else {
             return "redirect:/user/toLogin";
         }
         User user = new User();
-        user.setUsername(username);
+        user.setPhone(phone);
         user.setEmail(email);
         user.setPassword(password);
         if (!userService.login(user)) {
             return "redirect:/user/toLogin";
         }
-        return "/index";
+        session.setAttribute("user", user);
+        return "redirect:/index";
     }
 
 

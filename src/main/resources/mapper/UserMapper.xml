@@ -26,8 +26,8 @@
         FROM user
         WHERE
         password = #{password}
-        <if test="username != null">
-            AND username = #{username}
+        <if test="phone != null">
+            AND phone = #{phone}
         </if>
         <if test="email != null">
             AND email = #{email}
@@ -48,6 +48,14 @@
         FROM user
         WHERE
         id = #{id}
+    </select>
+
+    <select id="phoneExits" parameterType="String">
+        SELECT count(id)
+        FROM user
+        where
+        phone = #{phone}
+        limit 1
     </select>
 
 

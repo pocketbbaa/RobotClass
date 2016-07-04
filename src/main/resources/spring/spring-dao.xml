@@ -75,13 +75,14 @@ http://www.springframework.org/schema/context/spring-context.xsd">
     </bean>
 
     <!-- 消息监听器 -->
-    <!--<bean id="consumerMessageListener" class="framwork.activeMQ.listener.ConsumerMessageListener"/>-->
+    <bean id="consumerMessageListener" class="framwork.activeMQ.listener.ConsumerMessageListener"/>
+
     <!-- 消息监听容器 -->
-    <!--<bean id="jmsContainer"
+    <bean id="jmsContainer"
           class="org.springframework.jms.listener.DefaultMessageListenerContainer">
         <property name="connectionFactory" ref="connectionFactory" />
         <property name="destination" ref="queueDestination" />
         <property name="messageListener" ref="consumerMessageListener" />
-    </bean>-->
+    </bean>
 
 </beans>

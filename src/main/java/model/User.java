@@ -11,7 +11,7 @@ public class User {
 
     private Long id;
     private String email;
-    private String username;
+    private String phone;
     private String password;
     private Date createTime;
 
@@ -20,18 +20,18 @@ public class User {
         return "User{" +
                 "id=" + id +
                 ", email='" + email + '\'' +
-                ", username='" + username + '\'' +
+                ", phone='" + phone + '\'' +
                 ", password='" + password + '\'' +
                 ", createTime=" + createTime +
                 '}';
     }
 
-    public String getUsername() {
-        return username;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     public Long getId() {

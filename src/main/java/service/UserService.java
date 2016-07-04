@@ -2,6 +2,8 @@ package service;
 
 import model.User;
 
+import javax.jms.Destination;
+
 /**
  * Created by admin on 2016/6/27.
  */
@@ -34,5 +36,18 @@ public interface UserService {
      * @return
      */
     boolean emailExist(String email);
+
+    /**
+     * 电话是否存在
+     * @param phone
+     * @return
+     */
+    boolean phoneExist(String phone);
+
+    /**
+     * 发送消息
+     * @param message
+     */
+    void sendMessage(String message);
 
 }

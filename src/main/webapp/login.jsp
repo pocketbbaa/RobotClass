@@ -84,11 +84,11 @@
             <div class="col-lg-8 col-lg-offset-2">
                 <!-- To configure the contact form email address, go to mail/contact_me.php and update the email address in the PHP file on line 19. -->
                 <!-- The form should work on most web servers, but if the form is not working you may need to configure your web server differently. -->
-                <form name="sentMessage" id="contactForm" novalidate>
+                <form action="${ctx}/user/login/" method="post">
                     <div class="row control-group">
                         <div class="form-group col-xs-12 floating-label-form-group controls">
                             <label>账号</label>
-                            <input type="text" class="form-control" placeholder="电话/邮箱" id="phone" required
+                            <input type="text" class="form-control" name="account" placeholder="电话/邮箱" id="account" required
                                    data-validation-required-message="请输入你的账号.">
                             <p class="help-block text-danger"></p>
                         </div>
@@ -96,7 +96,7 @@
                     <div class="row control-group">
                         <div class="form-group col-xs-12 floating-label-form-group controls">
                             <label>密码</label>
-                            <input type="tel" class="form-control" placeholder="密码" id="password" required
+                            <input type="text" class="form-control" name="password" placeholder="密码" id="password" required
                                    data-validation-required-message="请输入你的密码.">
                             <p class="help-block text-danger"></p>
                         </div>
@@ -106,14 +106,11 @@
                     <div class="row">
                         <div class="form-group col-xs-12">
                             <button type="submit" class="btn btn-success btn-lg">登录</button>
+                            &nbsp; &nbsp; &nbsp; &nbsp;
+                            <a type="button" class="btn btn-success btn-lg" href="${ctx}/regist_1.jsp">没有账号注册一个</a>
                         </div>
                     </div>
                 </form>
-                <div class="row">
-                    <div class="form-group col-xs-12">
-                        <a type="button" class="btn btn-success btn-lg" href="${ctx}/regist_1.jsp">注册</a>
-                    </div>
-                </div>
             </div>
         </div>
     </div>

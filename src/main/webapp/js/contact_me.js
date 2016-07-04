@@ -1,6 +1,6 @@
-$(function() {
+/*$(function() {*/
 
-    $("#contactForm input,#contactForm textarea").jqBootstrapValidation({
+   /* $("#contactForm input,#contactForm textarea").jqBootstrapValidation({
         preventSubmit: true,
         submitError: function($form, event, errors) {
             // additional error messages or events
@@ -64,10 +64,10 @@ $(function() {
     $("a[data-toggle=\"tab\"]").click(function(e) {
         e.preventDefault();
         $(this).tab("show");
-    });
-});
+    });*/
+/*});*/
 
 // When clicking on Full hide fail/success boxes
-$('#name').focus(function() {
+/*$('#name').focus(function() {
     $('#success').html('');
-});
+});*/

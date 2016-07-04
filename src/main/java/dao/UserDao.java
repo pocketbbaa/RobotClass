@@ -37,12 +37,12 @@ public interface UserDao {
 
     /**
      * 校验用户信息正确性
-     * @param username
+     * @param phone
      * @param email
      * @param password
      * @return
      */
-    int checkLogin(String username,String email,String password);
+    int checkLogin(@Param("phone") String phone,@Param("email") String email,@Param("password") String password);
 
     /**
      * 根据ID获取用户信息
@@ -50,6 +50,13 @@ public interface UserDao {
      * @return
      */
     User getUserById(Long id);
+
+    /**
+     * 电话是否存在
+     * @param phone
+     * @return
+     */
+    int phoneExits(String phone);
 
 
 }

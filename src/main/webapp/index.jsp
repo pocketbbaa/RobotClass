@@ -59,9 +59,18 @@
                 <li class="page-scroll">
                     <a href="#contact">关于我们</a>
                 </li>
-                <li class="page-scroll">
-                    <a href="${ctx}/login.jsp">登录</a>
-                </li>
+                <c:choose>
+                    <c:when test="${empty user}">
+                        <li class="page-scroll">
+                            <a href="${ctx}/login.jsp">登录</a>
+                        </li>
+                    </c:when>
+                    <c:otherwise>
+                        <li class="page-scroll">
+                            <a href="">欢迎你： ${user.email}</a>
+                        </li>
+                    </c:otherwise>
+                </c:choose>
             </ul>
         </div>
         <!-- /.navbar-collapse -->
