@@ -41,7 +41,7 @@ public class ConsumerMessageListener implements MessageListener {
         //参数说明：邮件服务器地址，邮件主题，邮件类容，发送者邮件地址
         MailSenderConfig c = new MailSenderConfig(SMTP_MAIL_HOST
                 , "认证信息"
-                , "<h1>I AM ROBOT</h1><dr/><h3><a href='192.168.2.103:8087/regist.jsp'>请点击我，完成信息校验!</a></h3>", EMAIL_USERNAME);
+                , "<h1>I AM ROBOT</h1>请点击下面的链接完成校验<dr/><a href=\"http://192.168.2.103:8087/regist.jsp\"><h3>192.168.2.103:8087/regist.jsp</h3></a>", EMAIL_USERNAME);
         c.setUsername(EMAIL_USERNAME);
         c.setPassword(EMAIL_PASSWORD);
         c.addToMail(TO_EMAIL_ADDRESS_1);

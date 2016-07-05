@@ -27,12 +27,12 @@ public interface UserDao {
     /**
      * 添加用户
      * @param email
-     * @param username
+     * @param phone
      * @param password
      * @param createTime
      * @return
      */
-    int addUser(@Param("email") String email, @Param("username") String username,
+    int addUser(@Param("email") String email, @Param("phone") String phone,
                     @Param("password") String password, @Param("createTime") Date createTime);
 
     /**
@@ -58,5 +58,10 @@ public interface UserDao {
      */
     int phoneExits(String phone);
 
-
+    /**
+     * 根据邮箱获取用户信息
+     * @param email
+     * @return
+     */
+    User getUserByEmail(String email);
 }

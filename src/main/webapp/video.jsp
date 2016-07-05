@@ -1,3 +1,4 @@
+<%@ page import="java.util.Date" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
@@ -30,44 +31,7 @@
 </head>
 <body id="page-top" class="index">
 <!-- Navigation -->
-<nav class="navbar navbar-default navbar-fixed-top">
-    <div class="container">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header page-scroll">
-            <button type="button" class="navbar-toggle" data-toggle="collapse"
-                    data-target="#bs-example-navbar-collapse-1">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="#page-top">I am ROBOT</a>
-        </div>
-
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav navbar-right">
-                <li class="hidden">
-                    <a href="#page-top"></a>
-                </li>
-                <li class="page-scroll">
-                    <a href="${ctx}/index.jsp">首页</a>
-                </li>
-                <li class="page-scroll">
-                    <a href="${ctx}/choiceclass.jsp">课程</a>
-                </li>
-                <li class="page-scroll">
-                    <a href="#contact">关于我们</a>
-                </li>
-                <li class="page-scroll">
-                    <a href="${ctx}/login.jsp">登录</a>
-                </li>
-            </ul>
-        </div>
-        <!-- /.navbar-collapse -->
-    </div>
-    <!-- /.container-fluid -->
-</nav>
+<jsp:include page="commons/header.jsp"/>
 
 <div style="width: auto;height:130px;"></div>
 
@@ -89,54 +53,83 @@
     </embed>
 </c:forEach>
 
+
+<!--评论区-->
+<br/>
+<div class="alert alert-success"><h4>评论区,给我们提点意见吧</h4></div>
+<br/>
+<nav style="width: 80%;margin-left: 200px;">
+
+    <c:forEach items="${commentVOs}" var="comment">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">
+                    ${comment.useremail} &nbsp;&nbsp;&nbsp;${comment.createTime}
+                </h3>
+            </div>
+            <div class="panel-body">
+                ${comment.text}
+            </div>
+        </div>
+    </c:forEach>
+
+
+    <!--分页-->
+    <nav style="text-align: center">
+        <ul class="pagination pagination-lg">
+            <li>
+                <c:choose>
+                    <c:when test="${coursePage.pageNo eq 1}">
+                        <a href="${ctx}/course/1/list" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </c:when>
+                    <c:otherwise>
+                        <a href="${ctx}/course/${coursePage.pageNo-1}/list" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </c:otherwise>
+                </c:choose>
+            </li>
+            <li><a href="${ctx}/course/1/list">1</a></li>
+            <c:forEach var="i" begin="2" end="${coursePage.totalPage}">
+                <li><a href="${ctx}/course/${i}/list">${i}</a></li>
+            </c:forEach>
+            <li>
+                <c:choose>
+                    <c:when test="${coursePage.pageNo eq coursePage.totalPage}">
+                        <a href="${ctx}/course/${coursePage.totalPage}/list" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </c:when>
+                    <c:otherwise>
+                        <a href="${ctx}/course/${coursePage.pageNo+1}/list" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </c:otherwise>
+                </c:choose>
+
+            </li>
+        </ul>
+    </nav>
+</nav>
+
+<nav style="width: 80%;margin-left: 200px;">
+    <form role="form" action="${ctx}/course/addComment" method="post">
+        <div class="form-group">
+            <label>请留下您宝贵的意见，让我们能做得更好</label>
+            <textarea class="form-control" rows="3" name="text"></textarea>
+        </div>
+        <input type="text" name="courseId" value="${course.id}" style="display: none">
+        <div style="margin-left: 1400px;">
+            <button type="submit" class="btn btn-info">确认提交</button>
+        </div>
+    </form>
+</nav>
+<br/><br/>
+
 <!-- Footer -->
-<footer class="text-center">
-    <div class="footer-above">
-        <div class="container">
-            <div class="row">
-                <div class="footer-col col-md-4">
-                    <h3>Location</h3>
-                    <p>3481 Melrose Place<br>Beverly Hills, CA 90210</p>
-                </div>
-                <div class="footer-col col-md-4">
-                    <h3>Around the Web</h3>
-                    <ul class="list-inline">
-                        <li>
-                            <a href="#" class="btn-social btn-outline"><i class="fa fa-fw fa-facebook"></i></a>
-                        </li>
-                        <li>
-                            <a href="#" class="btn-social btn-outline"><i class="fa fa-fw fa-google-plus"></i></a>
-                        </li>
-                        <li>
-                            <a href="#" class="btn-social btn-outline"><i class="fa fa-fw fa-twitter"></i></a>
-                        </li>
-                        <li>
-                            <a href="#" class="btn-social btn-outline"><i class="fa fa-fw fa-linkedin"></i></a>
-                        </li>
-                        <li>
-                            <a href="#" class="btn-social btn-outline"><i class="fa fa-fw fa-dribbble"></i></a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="footer-col col-md-4">
-                    <h3>About Freelancer</h3>
-                    <p>Freelance is a free to use, open source Bootstrap theme created Start Bootstrap.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="footer-below">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    Copyright &copy; 2016.Company name All rights reserved.<a target="_blank"
-                                                                              href="http://sc.chinaz.com/moban/">
-                    &#x7F51;&#x9875;&#x6A21;&#x677F;</a>
-                </div>
-            </div>
-        </div>
-    </div>
-</footer>
+<jsp:include page="commons/footer.jsp"/>
 
 
 <!-- jQuery -->

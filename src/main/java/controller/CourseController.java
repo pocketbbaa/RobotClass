@@ -1,9 +1,13 @@
 package controller;
 
+import com.sun.xml.internal.messaging.saaj.util.FinalArrayList;
 import enums.CourseEnum;
+import enums.UserEnum;
 import model.Comment;
 import model.Course;
+import model.User;
 import model.Video;
+import org.apache.commons.collections.FastArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -11,13 +15,19 @@ import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import service.CommentService;
 import service.CourseService;
+import service.UserService;
 import service.VideoService;
 import utils.Page;
+import vo.CommentVO;
 import vo.coursesVO;
 
+import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -37,9 +47,11 @@ public class CourseController {
     private VideoService videoService;
     @Autowired
     private CommentService commentService;
+    @Autowired
+    private UserService userService;
 
 
-    /**
+     /**
      * 课程列表页（分页）
      *
      * @param map
@@ -97,13 +109,57 @@ public class CourseController {
         }
 
         map.put("videoList", videoList);
-        List<Comment> commentList = commentService.getCommentListByPage(courseId);
+        List<Comment> commentList = commentService.getCommentList(courseId);
         if (CollectionUtils.isEmpty(commentList)) {
             map.put("message", CourseEnum.COMMENT_NOTEXIST.getStateInfo());
         }
-        map.put("commentList", commentList);
+        List<CommentVO> commentVOs = new ArrayList<CommentVO>();
+        for(Comment comment : commentList){
+            CommentVO vo = new CommentVO();
+            Long userId =  comment.getUserId();
+            if(userId != null){
+                User user = userService.getUserById(userId);
+                vo.setUseremail(user.getEmail());
+            }
+            vo.setCreateTime(comment.getCreateTime().toString());
+            vo.setText(comment.getText());
+            commentVOs.add(vo);
+        }
+        map.put("commentVOs", commentVOs);
 
         return new ModelAndView("/video", map);
+    }
+
+
+    /**
+     * 添加评论
+     * @param text
+     * @param courseId
+     * @param session
+     * @param map
+     * @return
+     */
+    @RequestMapping(value = "/addComment", method = RequestMethod.POST)
+    public ModelAndView addComment(@RequestParam("text") String text, @RequestParam("courseId") Long courseId, HttpSession session, ModelMap map) {
+
+        if (text == null || courseId == null || courseId == 0) {
+            map.put("message",CourseEnum.PARAME_ERROR.getStateInfo());
+            return new ModelAndView("redirect:/404",map);
+        }
+        User user = (User) session.getAttribute("user");
+        if (user == null) {
+            map.put("message", UserEnum.USER_NOJD.getStateInfo());
+            return new ModelAndView("redirect:/404",map);
+        }
+        Comment comment = new Comment();
+        comment.setText(text);
+        comment.setCreateTime(new Date());
+        boolean addSuccess = commentService.addComment(user.getId(), courseId, comment);
+        if (!addSuccess) {
+            map.put("message",UserEnum.USER_ADDERROR.getStateInfo());
+            return new ModelAndView("redirect:/404",map);
+        }
+        return new ModelAndView("redirect:/course/"+courseId+"/detail");
     }
 
 

@@ -62,16 +62,27 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean phoneExist(String phone) {
         int i = dao.phoneExits(phone);
-        return i ==1;
+        return i == 1;
     }
 
     @Override
     public void sendMessage(String message) {
         try {
             producerService.sendMessage(destination, message);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public User getUserByEmail(String email) {
+
+        return dao.getUserByEmail(email);
+    }
+
+    @Override
+    public User getUserById(Long id) {
+        return dao.getUserById(id);
     }
 
 

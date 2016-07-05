@@ -37,25 +37,31 @@
 
     <insert id="addUser">
         INSERT ignore INTO user
-        (email,username,password,create_time)
+        (email,phone,password,create_time)
         VALUES
-        (#{email},#{username},#{password},#{createTime})
+        (#{email},#{phone},#{password},#{createTime})
     </insert>
 
-    <select id="getUserById" parameterType="Long">
+    <select id="getUserById" parameterType="Long" resultType="User">
         SELECT
-        (id,email,username,password,create_time)
+        id,email,phone,password,create_time
         FROM user
         WHERE
         id = #{id}
     </select>
 
-    <select id="phoneExits" parameterType="String">
+    <select id="phoneExits" parameterType="String" resultType="int">
         SELECT count(id)
         FROM user
         where
         phone = #{phone}
         limit 1
+    </select>
+
+    <select id="getUserByEmail" parameterType="String" resultType="User">
+        SELECT * FROM user
+        WHERE
+        email = #{email}
     </select>
 
 

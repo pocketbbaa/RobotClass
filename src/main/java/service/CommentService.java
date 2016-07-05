@@ -14,7 +14,7 @@ public interface CommentService {
      * @param courseId
      * @return
      */
-    List<Comment> getCommentListByPage(Long courseId);
+    List<Comment> getCommentList(Long courseId);
 
     /**
      * 添加评论

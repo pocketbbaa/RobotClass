@@ -27,7 +27,7 @@ public class IndexController {
     @RequestMapping(value = "index")
     public ModelAndView showIndex(ModelMap map, HttpSession session) {
 
-        int top = 3;
+        int top = 6;
         System.out.println("-----index-----");
         //课程列表数据
         List<Course> courseList = courseService.getCourseTopN(top);

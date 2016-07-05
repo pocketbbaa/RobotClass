@@ -50,4 +50,17 @@ public interface UserService {
      */
     void sendMessage(String message);
 
+    /**
+     * 根据邮箱获取用户信息
+     * @param email
+     * @return
+     */
+    User getUserByEmail(String email);
+
+    /**
+     * 根据ID获取用户详情
+     * @param id
+     * @return
+     */
+    User getUserById(Long id);
 }

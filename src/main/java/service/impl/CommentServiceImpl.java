@@ -5,6 +5,7 @@ import model.Comment;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import service.CommentService;
+import utils.Page;
 
 import java.util.List;
 
@@ -19,10 +20,9 @@ public class CommentServiceImpl implements CommentService {
     private CommentDao dao;
 
     @Override
-    public List<Comment> getCommentListByPage(Long courseId) {
+    public List<Comment> getCommentList(Long courseId) {
 
-
-        return null;
+        return dao.getCommentList(courseId);
     }
 
     @Override

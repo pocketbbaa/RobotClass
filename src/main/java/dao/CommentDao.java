@@ -12,12 +12,12 @@ import java.util.List;
 public interface CommentDao {
 
     /**
-     * 根据课程ID获取课程评论分页列表
+     * 根据课程ID获取课程评论列表
      *
      * @param courseId
      * @return
      */
-    List<Comment> getCommentListByPage(Long courseId);
+    List<Comment> getCommentList(Long courseId);
 
     /**
      * 添加评论

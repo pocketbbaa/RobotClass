@@ -131,7 +131,6 @@ public class UserController {
         //将用户邮箱存入session
         session.setAttribute("email", email);
 
-        //TODO 发送邮件消息
         try {
             //发送MQ消息
             userService.sendMessage(email);
@@ -153,26 +152,24 @@ public class UserController {
      * @throws Exception
      */
     @RequestMapping(value = "/addUser", method = RequestMethod.POST)
-    public ModelAndView addUser(@PathVariable("phone") String phone, @PathVariable("password") String password,
+    public ModelAndView addUser(@RequestParam("phone") String phone, @RequestParam("password") String password,
                                 ModelMap map, HttpSession session) throws Exception {
 
         String email = (String) session.getAttribute("email");
-        if (phone == null || password == null || email == null) {
+
+        if (phone == null || password == null) {
             map.put("message", UserEnum.USER_PARAMEERROR.getStateInfo());
-            return new ModelAndView("/regist", map);
+            return new ModelAndView("redirect:/regist", map);
         }
-        if (!RegexUtil.checkCellphone(phone) || !RegexUtil.checkPassword(password) || !RegexUtil.checkEmail(email)) {
+        if (!RegexUtil.checkCellphone(phone) || !RegexUtil.checkPassword(password)) {
             map.put("message", UserEnum.USER_PARAMEERROR.getStateInfo());
-            return new ModelAndView("/regist", map);
+            return new ModelAndView("redirect:/regist", map);
         }
         if (userService.phoneExist(phone)) {
             map.put("message", UserEnum.USERNAME_EXIST.getStateInfo());
-            return new ModelAndView("/regist", map);
+            return new ModelAndView("redirect:/regist", map);
         }
-        if (userService.emailExist(email)) {
-            map.put("message", UserEnum.EMAIL_EXIST.getStateInfo());
-            return new ModelAndView("/regist", map);
-        }
+
 
         User user = new User();
         user.setPhone(phone);
@@ -182,12 +179,21 @@ public class UserController {
 
         if (!userService.regist(user)) {
             map.put("message", UserEnum.USER_ADDERROR.getStateInfo());
-            return new ModelAndView("/regist", map);
+            return new ModelAndView("redirect:/regist", map);
         }
-
+        //注册成功，将用户信息存入session
+        user = userService.getUserByEmail(email);
+        session.setAttribute("user", user);
         return new ModelAndView("/regist_success");
     }
 
+    /**
+     * 登录
+     * @param account
+     * @param password
+     * @param session
+     * @return
+     */
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public String login(@RequestParam("account") String account, @RequestParam("password") String password, HttpSession session) {
 
@@ -211,7 +217,23 @@ public class UserController {
         if (!userService.login(user)) {
             return "redirect:/user/toLogin";
         }
+        user = userService.getUserByEmail(email);
         session.setAttribute("user", user);
+        return "redirect:/index";
+    }
+
+    /**
+     * 用户登出
+     * @param session
+     * @return
+     */
+    @RequestMapping(value = "/logout", method = RequestMethod.GET)
+    public String logout(HttpSession session) {
+        User user = (User) session.getAttribute("user");
+        if(user != null){
+            session.removeAttribute("user");
+            return "redirect:/index";
+        }
         return "redirect:/index";
     }
 
