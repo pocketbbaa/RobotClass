@@ -85,4 +85,7 @@ http://www.springframework.org/schema/context/spring-context.xsd">
         <property name="messageListener" ref="consumerMessageListener" />
     </bean>
 
+    <!--RedisDao-->
+    <bean id="redisDao" class="dao.cache.RedisDao"/>
+
 </beans>

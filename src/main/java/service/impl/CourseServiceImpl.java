@@ -1,12 +1,17 @@
 package service.impl;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import dao.CourseDao;
+import dao.cache.RedisDao;
 import model.Course;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 import service.CourseService;
 import utils.Page;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -17,6 +22,8 @@ public class CourseServiceImpl implements CourseService {
 
     @Autowired
     private CourseDao dao;
+    @Autowired
+    private RedisDao<Course> redisDao;
 
     @Override
     public Page<Course> getCourseListByPage(Integer pageIndex, Integer pageSize) {
@@ -27,16 +34,31 @@ public class CourseServiceImpl implements CourseService {
         return page;
     }
 
-
     @Override
     public Course getCourseById(Long id) {
-
-        return dao.getCourseById(id);
+        String key = "courseId" + id;
+        Course course = (Course) redisDao.getObject(key);
+        if (course == null) {
+            course = dao.getCourseById(id);
+            redisDao.setObject(key, course);
+        }
+        return course;
     }
 
     @Override
     public List<Course> getCourseTopN(int top) {
+        String key = "top";
+        List<String> list = redisDao.getList(key, new Long(top));
+        List<Course> courseList = new ArrayList<>();
+        for (String str : list) {
+            Course course = JSON.parseObject(str, Course.class);
+            courseList.add(course);
+        }
+        if (CollectionUtils.isEmpty(courseList)) {
+            courseList = dao.getCourseTopN(top);
+            redisDao.setList(key, courseList);
+        }
 
-        return dao.getCourseTopN(top);
+        return courseList;
     }
 }
