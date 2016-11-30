@@ -22,7 +22,7 @@ public class ProducerServiceImpl implements ProducerService {
     private JmsTemplate jmsTemplate;
 
     @Override
-    public void sendMessage(Destination destination, String message) {
+    public void sendMessage(Destination destination,final String message) {
 
         System.out.println("生产者发送了一个消息:" + message);
 
